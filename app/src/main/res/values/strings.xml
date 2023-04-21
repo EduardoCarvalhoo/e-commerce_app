@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">e-commerce_app</string>
+
+    <!-- Home -->
+    <string name="home_informative_text_for_search_text">Search Product</string>
+    <string name="home_menu_image_button_content_description">menu</string>
+    <string name="home_informative_title_text_view">Find your Product</string>
+    <string name="home_apple_text">Apple</string>
+    <string name="home_samsung_text">Samsung</string>
+    <string name="home_huawei_text">Huawei</string>
+    <string name="home_oppo_text">OPPO</string>
+    <string name="home_product_categories_content_description">product categories</string>
+
+    <!-- item_product -->
+    <string name="item_product_description_text">iPhone 9</string>
+    <string name="item_product_smartphones_text">smartphones</string>
+    <string name="item_product_price_text">$549</string>
 </resources>

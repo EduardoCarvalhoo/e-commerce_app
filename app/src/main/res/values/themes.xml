@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Ecommerce_app" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Ecommerce_app" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -13,4 +13,56 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="search_prod">
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">#8C1B153D</item>
+    </style>
+
+    <style name="find_your_product">
+        <item name="android:textSize">36sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#1B153D</item>
+    </style>
+
+    <style name="apple">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#92278F</item>
+    </style>
+
+    <style name="samsung">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#A69095A6</item>
+    </style>
+
+    <style name="huawei">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#A69095A6</item>
+    </style>
+
+    <style name="oppo">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#A69095A6</item>
+    </style>
+
+    <style name="iphone_9">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#1B153D</item>
+    </style>
+
+    <style name="smartphones">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">#9095A6</item>
+    </style>
+
+    <style name="some_id">
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">#92278F</item>
+    </style>
+
+
 </resources>
