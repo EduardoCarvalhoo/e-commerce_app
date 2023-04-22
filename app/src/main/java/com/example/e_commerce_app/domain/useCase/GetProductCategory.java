@@ -3,6 +3,6 @@ package com.example.e_commerce_app.domain.useCase;
 import com.example.e_commerce_app.domain.model.ProductCategory;
 import com.example.e_commerce_app.domain.result.Result;
 
-public interface GetProductList {
+public interface GetProductCategory {
     Result<ProductCategory> call();
 }

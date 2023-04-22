@@ -5,14 +5,17 @@ import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
 import com.example.e_commerce_app.domain.model.ProductCategory;
 import com.example.e_commerce_app.domain.result.Result;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
+public class ProductsCategoryApiDataSourceImpl implements ProductsCategoryApiDataSource {
     private final ProductsApiService service;
 
-    public ProductsApiDataSourceImpl(ProductsApiService service) {
+    @Inject
+    public ProductsCategoryApiDataSourceImpl(ProductsApiService service) {
         this.service = service;
     }
 

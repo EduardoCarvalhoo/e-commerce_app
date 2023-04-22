@@ -1,13 +1,16 @@
 package com.example.e_commerce_app.domain.useCase;
 
-import com.example.e_commerce_app.data.repository.ProductsRepository;
+import com.example.e_commerce_app.data.repository.ProductsCategoryRepository;
 import com.example.e_commerce_app.domain.model.ProductCategory;
 import com.example.e_commerce_app.domain.result.Result;
 
-public class GetProductListImpl implements GetProductList {
-    private final ProductsRepository productsRepository;
+import javax.inject.Inject;
 
-    public GetProductListImpl(ProductsRepository productsRepository) {
+public class GetProductCategoryImpl implements GetProductCategory {
+    private final ProductsCategoryRepository productsRepository;
+
+    @Inject
+    public GetProductCategoryImpl(ProductsCategoryRepository productsRepository) {
         this.productsRepository = productsRepository;
     }
 
