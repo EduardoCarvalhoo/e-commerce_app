@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_commerce_app.databinding.ActivityHomeBinding;
+import com.google.android.material.tabs.TabLayout;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -24,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
         viewModel.getProductCategory();
         setupObserver();
+        observeClicksOnLayoutTab();
 
     }
 
@@ -32,14 +34,35 @@ public class HomeActivity extends AppCompatActivity {
                 productCategoryList -> {
                     for (String productCategory : productCategoryList) {
                         binding.homeTabLayout.addTab(binding.homeTabLayout.newTab().setText(productCategory));
-                        setSearchForProducts(productCategory);
                     }
                 }
         );
     }
 
-    public void setSearchForProducts(String productCategory) {
-        viewModel.getProducts(productCategory);
+    public void observeClicksOnLayoutTab() {
+        binding.homeTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                CharSequence selectedCategory = tab.getText();
+                if (selectedCategory != null) {
+                    setSearchForProducts(selectedCategory.toString());
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    public void setSearchForProducts(String productCategoryName) {
+        viewModel.getProducts(productCategoryName);
     }
 
 }
