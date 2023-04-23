@@ -21,6 +21,25 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         setContentView(binding.getRoot());
+
         viewModel.getProductCategory();
+        setupObserver();
+
     }
+
+    public void setupObserver() {
+        viewModel.productCategoryDataSuccessfullyReadLiveData.observe(this,
+                productCategoryList -> {
+                    for (String productCategory : productCategoryList) {
+                        binding.homeTabLayout.addTab(binding.homeTabLayout.newTab().setText(productCategory));
+                        setSearchForProducts(productCategory);
+                    }
+                }
+        );
+    }
+
+    public void setSearchForProducts(String productCategory) {
+        viewModel.getProducts(productCategory);
+    }
+
 }

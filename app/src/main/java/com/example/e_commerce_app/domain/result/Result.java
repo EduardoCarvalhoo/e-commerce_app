@@ -1,6 +1,6 @@
 package com.example.e_commerce_app.domain.result;
 
-public abstract class Result<R> {
+public abstract class Result<T> {
     private Result() {
     }
 
@@ -17,7 +17,7 @@ public abstract class Result<R> {
         }
     }
 
-    public static final class Error extends Result<Throwable> {
+    public static final class Error<T> extends Result<T> {
         private final Exception value;
 
         public Error(Exception value) {

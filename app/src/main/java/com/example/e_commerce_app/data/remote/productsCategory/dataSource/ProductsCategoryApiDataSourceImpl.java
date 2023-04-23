@@ -1,9 +1,15 @@
 package com.example.e_commerce_app.data.remote.productsCategory.dataSource;
 
-import com.example.e_commerce_app.data.remote.productsCategory.model.ProductListResponse;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
-import com.example.e_commerce_app.domain.model.ProductCategory;
+import com.example.e_commerce_app.domain.model.ProductCategoryList;
 import com.example.e_commerce_app.domain.result.Result;
+
+import java.util.List;
+import java.util.function.Function;
 
 import javax.inject.Inject;
 
@@ -20,21 +26,23 @@ public class ProductsCategoryApiDataSourceImpl implements ProductsCategoryApiDat
     }
 
     @Override
-    public Result<ProductCategory> getProducts() {
-        Call<ProductListResponse> call = service.getProductList();
-        call.enqueue(new Callback<ProductListResponse>() {
+    public void getProducts(Function<Result<ProductCategoryList>, Void> callback) {
+        Call<List<String>> call = service.getProductCategoryList();
+        call.enqueue(new Callback<List<String>>() {
             @Override
-            public void onResponse(Call<ProductListResponse> call, Response<ProductListResponse> response) {
-                if (response.isSuccessful()) {
-                    ProductListResponse productList = response.body();
+            public void onResponse(@NonNull Call<List<String>> call, @NonNull Response<List<String>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<String> productCategoryListResponse = response.body();
+                    ProductCategoryList productCategoryList = new ProductCategoryList(productCategoryListResponse);
+                    callback.apply(new Result.Success<>(productCategoryList));
                 }
             }
 
             @Override
-            public void onFailure(Call<ProductListResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<String>> call, @NonNull Throwable t) {
 
             }
         });
-        return null;
+
     }
 }
