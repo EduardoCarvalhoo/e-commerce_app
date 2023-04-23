@@ -15,4 +15,5 @@
     <string name="item_product_description_text">iPhone 9</string>
     <string name="item_product_smartphones_text">smartphones</string>
     <string name="item_product_price_text">$549</string>
+    <string name="item_product_dollar_sign_real">$%1$s</string>
 </resources>

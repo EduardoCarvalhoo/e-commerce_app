@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_commerce_app.databinding.ActivityHomeBinding;
+import com.example.e_commerce_app.domain.model.ProductList;
+import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -37,6 +39,10 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        viewModel.productListDataGetSuccessfullyLiveData.observe(this, productList -> {
+            setupRecyclerview(productList);
+        });
     }
 
     public void observeClicksOnLayoutTab() {
@@ -65,4 +71,8 @@ public class HomeActivity extends AppCompatActivity {
         viewModel.getProducts(productCategoryName);
     }
 
+    public void setupRecyclerview(ProductList productList) {
+        HomeAdapter homeAdapter = new HomeAdapter(productList);
+        binding.homeRecyclerView.setAdapter(homeAdapter);
+    }
 }
