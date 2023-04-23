@@ -1,6 +1,7 @@
 package com.example.e_commerce_app.presentation.home;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,8 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
-
     private HomeViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         viewModel.getProductCategory();
         setupObserver();
         observeClicksOnLayoutTab();
+        binding.homeProgressBar.setVisibility(View.VISIBLE);
 
     }
 
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void setupRecyclerview(ProductList productList) {
+        binding.homeProgressBar.setVisibility(View.GONE);
         HomeAdapter homeAdapter = new HomeAdapter(productList);
         binding.homeRecyclerView.setAdapter(homeAdapter);
     }
