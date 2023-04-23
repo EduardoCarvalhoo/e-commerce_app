@@ -19,6 +19,6 @@ public class ProductsCategoryRepositoryImpl implements ProductsCategoryRepositor
 
     @Override
     public void getProductList(Function<Result<ProductCategoryList>, Void> callback) {
-        productsApiDataSource.getProducts(callback);
+        productsApiDataSource.getProductsCategory(callback);
     }
 }

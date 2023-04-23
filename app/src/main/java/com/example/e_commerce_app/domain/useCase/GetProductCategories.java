@@ -5,7 +5,7 @@ import com.example.e_commerce_app.domain.result.Result;
 
 import java.util.function.Function;
 
-public interface GetProductCategory {
+public interface GetProductCategories {
     void call(Function<Result<ProductCategoryList>, Void> callback);
 }
 

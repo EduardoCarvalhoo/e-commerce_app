@@ -6,5 +6,5 @@ import com.example.e_commerce_app.domain.result.Result;
 import java.util.function.Function;
 
 public interface ProductsCategoryApiDataSource {
-    void getProducts(Function<Result<ProductCategoryList>, Void> callback);
+    void getProductsCategory(Function<Result<ProductCategoryList>, Void> callback);
 }

@@ -1,7 +1,5 @@
 package com.example.e_commerce_app.data.remote.productsCategory.dataSource;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
@@ -26,7 +24,7 @@ public class ProductsCategoryApiDataSourceImpl implements ProductsCategoryApiDat
     }
 
     @Override
-    public void getProducts(Function<Result<ProductCategoryList>, Void> callback) {
+    public void getProductsCategory(Function<Result<ProductCategoryList>, Void> callback) {
         Call<List<String>> call = service.getProductCategoryList();
         call.enqueue(new Callback<List<String>>() {
             @Override

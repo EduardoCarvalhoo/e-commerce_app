@@ -8,16 +8,16 @@ import java.util.function.Function;
 
 import javax.inject.Inject;
 
-public class GetProductCategoryImpl implements GetProductCategory {
-    private final ProductsCategoryRepository productsRepository;
+public class GetProductCategoriesImpl implements GetProductCategories {
+    private final ProductsCategoryRepository productsCategoryRepository;
 
     @Inject
-    public GetProductCategoryImpl(ProductsCategoryRepository productsRepository) {
-        this.productsRepository = productsRepository;
+    public GetProductCategoriesImpl(ProductsCategoryRepository productsRepository) {
+        this.productsCategoryRepository = productsRepository;
     }
 
     @Override
     public void call(Function<Result<ProductCategoryList>, Void> callback) {
-        productsRepository.getProductList(callback);
+        productsCategoryRepository.getProductList(callback);
     }
 }
