@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">e-commerce_app</string>
 
-    <!-- Home -->
+    <!-- Activity_home -->
     <string name="home_informative_text_for_search_text">Search Product</string>
     <string name="home_menu_image_button_content_description">menu</string>
     <string name="home_informative_title_text_view">Find your Product</string>
@@ -10,10 +10,17 @@
     <string name="home_huawei_text">Huawei</string>
     <string name="home_oppo_text">OPPO</string>
     <string name="home_product_categories_content_description">product categories</string>
+    <string name="home_menu_setting_text">Menu setting not implemented</string>
 
-    <!-- item_product -->
-    <string name="item_product_description_text">iPhone 9</string>
-    <string name="item_product_smartphones_text">smartphones</string>
-    <string name="item_product_price_text">$549</string>
+    <!-- Item_product -->
     <string name="item_product_dollar_sign_real">$%1$s</string>
+
+    <!-- Erro messages -->
+    <string name="no_internet_connection_error_text">No internet connection, try again!</string>
+    <string name="generic_error_text">An error occurred, please try again later!</string>
+
+    <!-- Alert dialog messages -->
+    <string name="dialog_title_text">Error!</string>
+    <string name="dialog_positive_button_message_text">Try Again</string>
+    <string name="dialog_negative_button_message_text">Cancel</string>
 </resources>
