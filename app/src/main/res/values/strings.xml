@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">e-commerce_app</string>
 
-    <!-- Activity_home -->
+    <!-- Home Activity -->
     <string name="home_informative_text_for_search_text">Search Product</string>
     <string name="home_menu_image_button_content_description">menu</string>
     <string name="home_informative_title_text_view">Find your Product</string>
@@ -10,17 +10,27 @@
     <string name="home_huawei_text">Huawei</string>
     <string name="home_oppo_text">OPPO</string>
     <string name="home_product_categories_content_description">product categories</string>
-    <string name="home_menu_setting_text">Menu setting not implemented</string>
+    <string name="home_menu_setting_not_implemented_message">Menu setting not implemented yet</string>
+    <string name="home_search_not_implemented_message">Search Product not implemented yet</string>
 
-    <!-- Item_product -->
+    <!-- Item Product -->
     <string name="item_product_dollar_sign_real">$%1$s</string>
 
-    <!-- Erro messages -->
+    <!-- Erro Messages -->
     <string name="no_internet_connection_error_text">No internet connection, try again!</string>
     <string name="generic_error_text">An error occurred, please try again later!</string>
 
-    <!-- Alert dialog messages -->
+    <!-- Alert Dialog Messages -->
     <string name="dialog_title_text">Error!</string>
     <string name="dialog_positive_button_message_text">Try Again</string>
     <string name="dialog_negative_button_message_text">Cancel</string>
+
+    <!-- Details Activity -->
+    <string name="details_back_image_button_content_description">back button</string>
+    <string name="details_favorite_button_image_button_content_description">favorite button</string>
+    <string name="details_add_to_cart_button">Add to cart</string>
+    <string name="details_favorite_not_implemented_message">favorite button not implemented yet</string>
+    <string name="details_add_button_not_implemented_message">add button not implemented yet</string>
+    <string name="details_name_text"> Details</string>
+
 </resources>

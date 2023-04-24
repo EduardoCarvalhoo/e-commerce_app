@@ -14,11 +14,15 @@ import com.example.e_commerce_app.R;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
 
+import java.util.function.Function;
+
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder> {
     private final ProductList productList;
+    private final Function<Product, Void> onItemClick;
 
-    public HomeAdapter(ProductList productList) {
+    public HomeAdapter(ProductList productList, Function<Product, Void> onItemClick) {
         this.productList = productList;
+        this.onItemClick = onItemClick;
     }
 
     @NonNull
@@ -38,7 +42,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return productList.getProducts().size();
     }
 
-    public static class HomeViewHolder extends RecyclerView.ViewHolder {
+    public class HomeViewHolder extends RecyclerView.ViewHolder {
         ImageView itemProductImageView;
         TextView itemBrandTextView;
         TextView itemCategoryTextView;
@@ -57,6 +61,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             itemCategoryTextView.setText(product.getCategory());
             String price = itemView.getResources().getString(R.string.item_product_dollar_sign_real, product.getPrice());
             itemPriceTextView.setText(price);
+            itemView.setOnClickListener(v -> HomeAdapter.this.onItemClick.apply(product));
             Glide.with(this.itemView).load(product.getImageUrl()).into(itemProductImageView);
         }
     }

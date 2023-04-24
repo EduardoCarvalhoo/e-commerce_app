@@ -8,6 +8,5 @@ import java.util.function.Function;
 
 public interface ProductsApiDataSource {
     void getProducts(Function<Result<ProductList>, Void> callback, String productCategoryName);
-
     void getProductCategories(Function<Result<ProductCategoryList>, Void> callback);
 }
