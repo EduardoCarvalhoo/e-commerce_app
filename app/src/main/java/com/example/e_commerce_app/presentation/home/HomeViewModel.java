@@ -24,12 +24,12 @@ public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<List<String>> _productCategoryDataSuccessfullyReadMutableLiveData = new MutableLiveData<>();
     LiveData<List<String>> productCategoryDataSuccessfullyReadLiveData = _productCategoryDataSuccessfullyReadMutableLiveData;
-    private final MutableLiveData<Exception> _errorReadingProductCategoryDataMutableLiveData = new MutableLiveData<>();
-    LiveData<Exception> errorReadingProductCategoryDataLiveData = _errorReadingProductCategoryDataMutableLiveData;
+    private final MutableLiveData<Throwable> _errorReadingProductCategoryDataMutableLiveData = new MutableLiveData<>();
+    LiveData<Throwable> errorReadingProductCategoryDataLiveData = _errorReadingProductCategoryDataMutableLiveData;
     private final MutableLiveData<ProductList> _productListDataGetSuccessfullyMutableLiveData = new MutableLiveData<>();
     LiveData<ProductList> productListDataGetSuccessfullyLiveData = _productListDataGetSuccessfullyMutableLiveData;
-    private final MutableLiveData<Exception> _errorReadingProductListDataLiveDataMutableLiveData = new MutableLiveData<>();
-    LiveData<Exception> errorReadingProductListDataLiveData = _errorReadingProductListDataLiveDataMutableLiveData;
+    private final MutableLiveData<Throwable> _errorReadingProductListDataLiveDataMutableLiveData = new MutableLiveData<>();
+    LiveData<Throwable> errorReadingProductListDataLiveData = _errorReadingProductListDataLiveDataMutableLiveData;
 
     @Inject
     public HomeViewModel(GetProductCategories getProductCategories, GetProducts getProducts) {

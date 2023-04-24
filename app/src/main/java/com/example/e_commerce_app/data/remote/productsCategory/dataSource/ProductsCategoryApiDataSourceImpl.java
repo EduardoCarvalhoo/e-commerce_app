@@ -38,9 +38,8 @@ public class ProductsCategoryApiDataSourceImpl implements ProductsCategoryApiDat
 
             @Override
             public void onFailure(@NonNull Call<List<String>> call, @NonNull Throwable t) {
-
+                callback.apply(new Result.Error<>(t));
             }
         });
-
     }
 }

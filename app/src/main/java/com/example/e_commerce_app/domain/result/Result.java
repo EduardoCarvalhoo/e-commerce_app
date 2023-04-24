@@ -18,14 +18,14 @@ public abstract class Result<T> {
     }
 
     public static final class Error<T> extends Result<T> {
-        private final Exception value;
+        private final Throwable value;
 
-        public Error(Exception value) {
+        public Error(Throwable value) {
             super();
             this.value = value;
         }
 
-        public Exception getValue() {
+        public Throwable getValue() {
             return value;
         }
     }
