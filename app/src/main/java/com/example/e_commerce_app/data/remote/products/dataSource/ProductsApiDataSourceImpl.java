@@ -1,4 +1,4 @@
-package com.example.e_commerce_app.data.remote.productsCategory.dataSource;
+package com.example.e_commerce_app.data.remote.products.dataSource;
 
 import androidx.annotation.NonNull;
 
@@ -6,6 +6,7 @@ import com.example.e_commerce_app.data.model.ProductListResponse;
 import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
 import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
+import com.example.e_commerce_app.domain.model.ProductCategoryList;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.domain.model.ServerErrorException;
 import com.example.e_commerce_app.domain.result.Result;
@@ -59,6 +60,26 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
                 } else {
                     callback.apply(new Result.Error<>(new ServerErrorException()));
                 }
+            }
+        });
+    }
+
+    @Override
+    public void getProductCategories(Function<Result<ProductCategoryList>, Void> callback) {
+        Call<List<String>> call = service.getProductCategoryList();
+        call.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<String>> call, @NonNull Response<List<String>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<String> productCategoryListResponse = response.body();
+                    ProductCategoryList productCategoryList = new ProductCategoryList(productCategoryListResponse);
+                    callback.apply(new Result.Success<>(productCategoryList));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<String>> call, @NonNull Throwable t) {
+                callback.apply(new Result.Error<>(t));
             }
         });
     }
