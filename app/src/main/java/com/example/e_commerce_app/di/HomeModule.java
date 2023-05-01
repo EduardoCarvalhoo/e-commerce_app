@@ -8,6 +8,8 @@ import com.example.e_commerce_app.domain.useCase.GetProductCategories;
 import com.example.e_commerce_app.domain.useCase.GetProductCategoriesImpl;
 import com.example.e_commerce_app.domain.useCase.GetProducts;
 import com.example.e_commerce_app.domain.useCase.GetProductsImpl;
+import com.example.e_commerce_app.domain.useCase.GetSearchedProducts;
+import com.example.e_commerce_app.domain.useCase.GetSearchedProductsImpl;
 
 import dagger.Binds;
 import dagger.Module;
@@ -28,4 +30,7 @@ public abstract class HomeModule {
 
     @Binds
     public abstract ProductsApiDataSource productsApiDataSource(ProductsApiDataSourceImpl impl);
+
+    @Binds
+    public abstract GetSearchedProducts getSearchedProducts(GetSearchedProductsImpl impl);
 }

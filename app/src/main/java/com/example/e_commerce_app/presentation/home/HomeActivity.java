@@ -34,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        binding = com.example.e_commerce_app.databinding.ActivityHomeBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         setContentView(binding.getRoot());
 
@@ -44,23 +44,6 @@ public class HomeActivity extends AppCompatActivity {
         setupSearchEditTextListener();
         binding.homeProgressBar.setVisibility(View.VISIBLE);
         setMenu();
-    }
-
-    private void setupSearchEditTextListener() {
-        binding.homeSearchProductFieldEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                Toast.makeText(HomeActivity.this, R.string.home_search_not_implemented_message, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     public void setupObserver() {
@@ -94,6 +77,8 @@ public class HomeActivity extends AppCompatActivity {
                 showAlertDialog(getString(R.string.generic_error_text), this, getProductsListener);
             }
         });
+
+        viewModel.researchedProductsSuccessfullyReadLiveData.observe(this, this::setVisibilityForFilteredProducts);
     }
 
     public void observeClicksOnLayoutTab() {
@@ -130,18 +115,51 @@ public class HomeActivity extends AppCompatActivity {
         binding.homeRecyclerView.setAdapter(homeAdapter);
     }
 
+
+    private void setupSearchEditTextListener() {
+        binding.homeSearchProductFieldEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                viewModel.getSearchedProducts(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+    }
+
+    public void setVisibilityForFilteredProducts(ProductList researchedProducts) {
+        String typedText = String.valueOf(binding.homeSearchProductFieldEditText.getText());
+        if (typedText.equals("")) {
+            setViewReset();
+            ProductList productListData = viewModel.productListDataGetSuccessfullyLiveData.getValue();
+            setupRecyclerview(productListData);
+        } else {
+            binding.homeInformativeTitleTextView.setVisibility(View.GONE);
+            binding.homeTabLayout.setVisibility(View.GONE);
+            setupRecyclerview(researchedProducts);
+        }
+    }
+
+    public void setViewReset() {
+        binding.homeInformativeTitleTextView.setVisibility(View.VISIBLE);
+        binding.homeTabLayout.setVisibility(View.VISIBLE);
+    }
+
     public void showAlertDialog(String message, Context context, DialogInterface.OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(message)
-                .setPositiveButton(context.getString(R.string.dialog_positive_button_message_text), listener)
-                .setNegativeButton(context.getString(R.string.dialog_negative_button_message_text), null);
+        builder.setMessage(message).setPositiveButton(context.getString(R.string.dialog_positive_button_message_text), listener).setNegativeButton(context.getString(R.string.dialog_negative_button_message_text), null);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
     public void setMenu() {
-        binding.homeMenuImageButton.setOnClickListener(v -> Toast.makeText(HomeActivity.this,
-                R.string.home_menu_setting_not_implemented_message, Toast.LENGTH_SHORT).show());
+        binding.homeMenuImageButton.setOnClickListener(v -> Toast.makeText(HomeActivity.this, R.string.home_menu_setting_not_implemented_message, Toast.LENGTH_SHORT).show());
     }
 
     public void setActivityCall(Product product) {

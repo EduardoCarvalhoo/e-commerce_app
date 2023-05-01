@@ -26,4 +26,9 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     public void getProductCategories(Function<Result<ProductCategoryList>, Void> callback) {
         productsApiDataSource.getProductCategories(callback);
     }
+
+    @Override
+    public void getSearchedProducts(Function<Result<ProductList>, Void> callback, String productName) {
+        productsApiDataSource.getSearchedProducts(callback, productName);
+    }
 }

@@ -9,6 +9,7 @@ import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.domain.result.Result;
 import com.example.e_commerce_app.domain.useCase.GetProductCategories;
 import com.example.e_commerce_app.domain.useCase.GetProducts;
+import com.example.e_commerce_app.domain.useCase.GetSearchedProducts;
 
 import java.util.List;
 import java.util.function.Function;
@@ -21,6 +22,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class HomeViewModel extends ViewModel {
     private final GetProductCategories getProductCategories;
     private final GetProducts getProducts;
+    private final GetSearchedProducts getSearchedProducts;
 
     private final MutableLiveData<List<String>> _productCategoryDataSuccessfullyReadMutableLiveData = new MutableLiveData<>();
     LiveData<List<String>> productCategoryDataSuccessfullyReadLiveData = _productCategoryDataSuccessfullyReadMutableLiveData;
@@ -30,11 +32,14 @@ public class HomeViewModel extends ViewModel {
     LiveData<ProductList> productListDataGetSuccessfullyLiveData = _productListDataGetSuccessfullyMutableLiveData;
     private final MutableLiveData<Throwable> _errorReadingProductListDataLiveDataMutableLiveData = new MutableLiveData<>();
     LiveData<Throwable> errorReadingProductListDataLiveData = _errorReadingProductListDataLiveDataMutableLiveData;
+    private final MutableLiveData<ProductList> _researchedProductsSuccessfullyReadMutableLiveData = new MutableLiveData<>();
+    LiveData<ProductList> researchedProductsSuccessfullyReadLiveData = _researchedProductsSuccessfullyReadMutableLiveData;
 
     @Inject
-    public HomeViewModel(GetProductCategories getProductCategories, GetProducts getProducts) {
+    public HomeViewModel(GetProductCategories getProductCategories, GetProducts getProducts, GetSearchedProducts getSearchedProducts) {
         this.getProductCategories = getProductCategories;
         this.getProducts = getProducts;
+        this.getSearchedProducts = getSearchedProducts;
     }
 
     public void getProductCategory() {
@@ -60,5 +65,17 @@ public class HomeViewModel extends ViewModel {
         };
 
         getProducts.call(callback, productCategoryName);
+    }
+
+    public void getSearchedProducts(CharSequence productName) {
+        Function<Result<ProductList>, Void> callback = productListResult -> {
+            if (productListResult instanceof Result.Success) {
+                _researchedProductsSuccessfullyReadMutableLiveData.postValue(((Result.Success<ProductList>) productListResult).getData());
+            } else if (productListResult instanceof Result.Error) {
+                _errorReadingProductCategoryDataMutableLiveData.postValue(((Result.Error<ProductList>) productListResult).getValue());
+            }
+            return null;
+        };
+        getSearchedProducts.call(callback, productName.toString());
     }
 }

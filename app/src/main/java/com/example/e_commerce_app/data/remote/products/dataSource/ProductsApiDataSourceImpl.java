@@ -83,4 +83,41 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
             }
         });
     }
+
+    @Override
+    public void getSearchedProducts(Function<Result<ProductList>, Void> callback, String productName) {
+        Call<ProductListResponse> call = service.getSearchedProducts(productName);
+        call.enqueue(new Callback<ProductListResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ProductListResponse> call, @NonNull Response<ProductListResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ProductListResponse productListResponse = response.body();
+                    List<Product> mapSearchedProducts = productListResponse.getProducts().stream()
+                            .map(productResponse -> new Product(
+                                    productResponse.getId(),
+                                    productResponse.getTitle(),
+                                    productResponse.getDescription(),
+                                    productResponse.getPrice(),
+                                    productResponse.getBrand(),
+                                    productResponse.getCategory(),
+                                    productResponse.getImages().stream().findFirst().orElse("")
+                            )).collect(Collectors.toList());
+
+                    ProductList productList = new ProductList(mapSearchedProducts);
+                    callback.apply(new Result.Success<>(productList));
+                } else {
+                    callback.apply(new Result.Error<>(new ServerErrorException()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ProductListResponse> call, @NonNull Throwable t) {
+                if (t instanceof IOException) {
+                    callback.apply(new Result.Error<>(new NetworkErrorException()));
+                } else {
+                    callback.apply(new Result.Error<>(new ServerErrorException()));
+                }
+            }
+        });
+    }
 }
