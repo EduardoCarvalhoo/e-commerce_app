@@ -8,9 +8,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_commerce_app.R;
@@ -20,6 +21,7 @@ import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.details.DetailsActivity;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.function.Function;
@@ -159,7 +161,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void setMenu() {
-        binding.homeMenuImageButton.setOnClickListener(v -> Toast.makeText(HomeActivity.this, R.string.home_menu_setting_not_implemented_message, Toast.LENGTH_SHORT).show());
+        DrawerLayout drawerLayout = binding.drawerLayout;
+        NavigationView navigationView = binding.homeNavView;
+        binding.homeMenuImageButton.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+        navigationView.setNavigationItemSelectedListener(item -> false);
     }
 
     public void setActivityCall(Product product) {
