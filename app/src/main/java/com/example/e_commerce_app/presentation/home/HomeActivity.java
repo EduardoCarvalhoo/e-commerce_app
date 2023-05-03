@@ -20,6 +20,7 @@ import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.details.DetailsActivity;
+import com.example.e_commerce_app.presentation.favorites.FavoriteProductsActivity;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -164,7 +165,14 @@ public class HomeActivity extends AppCompatActivity {
         DrawerLayout drawerLayout = binding.drawerLayout;
         NavigationView navigationView = binding.homeNavView;
         binding.homeMenuImageButton.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
-        navigationView.setNavigationItemSelectedListener(item -> false);
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_menu_favorite) {
+                Intent intent = new Intent(HomeActivity.this, FavoriteProductsActivity.class);
+                startActivity(intent);
+            }
+            return false;
+        });
     }
 
     public void setActivityCall(Product product) {

@@ -15,9 +15,11 @@
     <string name="nav_header_icon_description">Navigation header</string>
     <string name="nav_header_title_text">E-Commerce</string>
 
-
     <!-- Navigation Menu -->
     <string name="nav_menu_favorite">Favorite</string>
+
+    <!-- Favorite Products -->
+    <string name="favorite_products_title_text">Favorite Products</string>
 
     <!-- Item Product -->
     <string name="item_product_dollar_sign_real">$%1$s</string>
@@ -32,14 +34,11 @@
     <string name="dialog_negative_button_message_text">Cancel</string>
 
     <!-- Details Activity -->
-    <string name="details_back_image_button_content_description">back button</string>
+    <string name="details_back_image_button_content_description">back</string>
     <string name="details_favorite_button_image_button_content_description">favorite button</string>
     <string name="details_add_to_cart_button">Add to cart</string>
     <string name="details_favorite_not_implemented_message">favorite button not implemented yet</string>
     <string name="details_add_button_not_implemented_message">add button not implemented yet</string>
     <string name="details_name_text">Details</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>
