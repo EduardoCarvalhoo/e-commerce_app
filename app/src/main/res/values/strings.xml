@@ -10,7 +10,14 @@
     <string name="home_huawei_text">Huawei</string>
     <string name="home_oppo_text">OPPO</string>
     <string name="home_product_categories_content_description">product categories</string>
-    <string name="home_nav_menu_favorite">Favorite</string>
+
+    <!-- Navigation Header -->
+    <string name="nav_header_icon_description">Navigation header</string>
+    <string name="nav_header_title_text">E-Commerce</string>
+
+
+    <!-- Navigation Menu -->
+    <string name="nav_menu_favorite">Favorite</string>
 
     <!-- Item Product -->
     <string name="item_product_dollar_sign_real">$%1$s</string>
