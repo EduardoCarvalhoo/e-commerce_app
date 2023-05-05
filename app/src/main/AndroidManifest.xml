@@ -16,10 +16,10 @@
         android:theme="@style/Theme.Ecommerce_app"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.favorites.FavoriteProductsActivity"
+            android:name=".presentation.home.favorites.FavoriteProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.details.DetailsActivity"
+            android:name=".presentation.home.details.DetailsActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.home.HomeActivity"

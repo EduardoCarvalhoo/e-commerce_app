@@ -40,5 +40,4 @@
     <string name="details_favorite_not_implemented_message">favorite button not implemented yet</string>
     <string name="details_add_button_not_implemented_message">add button not implemented yet</string>
     <string name="details_name_text">Details</string>
-
 </resources>

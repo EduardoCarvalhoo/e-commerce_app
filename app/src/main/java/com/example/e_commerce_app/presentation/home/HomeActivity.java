@@ -19,9 +19,9 @@ import com.example.e_commerce_app.databinding.ActivityHomeBinding;
 import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
-import com.example.e_commerce_app.presentation.details.DetailsActivity;
-import com.example.e_commerce_app.presentation.favorites.FavoriteProductsActivity;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
+import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
+import com.example.e_commerce_app.presentation.home.favorites.FavoriteProductsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 

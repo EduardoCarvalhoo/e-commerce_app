@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.details.DetailsActivity">
+    tools:context=".presentation.home.details.DetailsActivity">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
@@ -44,7 +44,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/details_favorite_button_image_button_content_description"
                 android:padding="12dp"
-                android:src="@drawable/ic_favorite"
+                android:src="@drawable/selector_favorite_image_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
