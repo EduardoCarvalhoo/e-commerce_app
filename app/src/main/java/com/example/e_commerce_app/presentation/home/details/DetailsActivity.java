@@ -47,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         favoriteButton = binding.detailsFavoriteImageButton;
-        productId = (String) getIntent().getSerializableExtra(ConstantsConfiguration.ProductKey);
+        productId = (String) getIntent().getSerializableExtra(ConstantsConfiguration.PRODUCT_KEY);
         getProductById();
         setupObserver();
         configureBackButton();

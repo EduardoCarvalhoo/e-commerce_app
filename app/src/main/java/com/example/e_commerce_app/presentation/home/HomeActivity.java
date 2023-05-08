@@ -178,7 +178,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void setActivityCall(Product product) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(ConstantsConfiguration.ProductKey, product.getId());
+        intent.putExtra(ConstantsConfiguration.PRODUCT_KEY, product.getId());
         startActivity(intent);
     }
 }
