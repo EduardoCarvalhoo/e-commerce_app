@@ -1,6 +1,7 @@
 package com.example.e_commerce_app.data.remote.rest;
 
 import com.example.e_commerce_app.data.model.ProductListResponse;
+import com.example.e_commerce_app.data.model.ProductResponse;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface ProductsApiService {
 
     @GET("/products/search")
     Call<ProductListResponse> getSearchedProducts(@Query("q") String productName);
+
+    @GET("/product/{productId}")
+    Call<ProductResponse> getSingleProduct(@Path("productId") String productId);
 }

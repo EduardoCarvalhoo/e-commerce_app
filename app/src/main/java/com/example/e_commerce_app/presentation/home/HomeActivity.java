@@ -22,6 +22,7 @@ import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
 import com.example.e_commerce_app.presentation.home.favorites.FavoriteProductsActivity;
+import com.example.e_commerce_app.utils.ConstantsConfiguration;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -177,7 +178,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void setActivityCall(Product product) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("product", product);
+        intent.putExtra(ConstantsConfiguration.ProductKey, product.getId());
         startActivity(intent);
     }
 }

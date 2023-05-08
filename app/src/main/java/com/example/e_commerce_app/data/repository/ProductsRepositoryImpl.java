@@ -1,6 +1,7 @@
 package com.example.e_commerce_app.data.repository;
 
 import com.example.e_commerce_app.data.remote.products.dataSource.ProductsApiDataSource;
+import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductCategoryList;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.domain.result.Result;
@@ -30,5 +31,10 @@ public class ProductsRepositoryImpl implements ProductsRepository {
     @Override
     public void getSearchedProducts(Function<Result<ProductList>, Void> callback, String productName) {
         productsApiDataSource.getSearchedProducts(callback, productName);
+    }
+
+    @Override
+    public void getSingleProduct(Function<Result<Product>, Void> callback, String productId) {
+        productsApiDataSource.getSingleProduct(callback, productId);
     }
 }

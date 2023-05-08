@@ -3,6 +3,7 @@ package com.example.e_commerce_app.data.remote.products.dataSource;
 import androidx.annotation.NonNull;
 
 import com.example.e_commerce_app.data.model.ProductListResponse;
+import com.example.e_commerce_app.data.model.ProductResponse;
 import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
 import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
@@ -38,14 +39,7 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
             public void onResponse(@NonNull Call<ProductListResponse> call, @NonNull Response<ProductListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ProductListResponse productListResponse = response.body();
-                    List<Product> mappedProductList = productListResponse.getProducts().stream()
-                            .map(productResponse -> new Product(
-                                    productResponse.getId(), productResponse.getTitle(),
-                                    productResponse.getDescription(), productResponse.getPrice(),
-                                    productResponse.getBrand(), productResponse.getCategory(),
-                                    productResponse.getImages().stream().findFirst().orElse("")
-                            ))
-                            .collect(Collectors.toList());
+                    List<Product> mappedProductList = productListResponse.getProducts().stream().map(productResponse -> new Product(productResponse.getId(), productResponse.getTitle(), productResponse.getDescription(), productResponse.getPrice(), productResponse.getBrand(), productResponse.getCategory(), productResponse.getImages().stream().findFirst().orElse(""))).collect(Collectors.toList());
                     ProductList productList = new ProductList(mappedProductList);
                     callback.apply(new Result.Success<>(productList));
                 } else {
@@ -92,16 +86,7 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
             public void onResponse(@NonNull Call<ProductListResponse> call, @NonNull Response<ProductListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ProductListResponse productListResponse = response.body();
-                    List<Product> mapSearchedProducts = productListResponse.getProducts().stream()
-                            .map(productResponse -> new Product(
-                                    productResponse.getId(),
-                                    productResponse.getTitle(),
-                                    productResponse.getDescription(),
-                                    productResponse.getPrice(),
-                                    productResponse.getBrand(),
-                                    productResponse.getCategory(),
-                                    productResponse.getImages().stream().findFirst().orElse("")
-                            )).collect(Collectors.toList());
+                    List<Product> mapSearchedProducts = productListResponse.getProducts().stream().map(productResponse -> new Product(productResponse.getId(), productResponse.getTitle(), productResponse.getDescription(), productResponse.getPrice(), productResponse.getBrand(), productResponse.getCategory(), productResponse.getImages().stream().findFirst().orElse(""))).collect(Collectors.toList());
 
                     ProductList productList = new ProductList(mapSearchedProducts);
                     callback.apply(new Result.Success<>(productList));
@@ -112,6 +97,32 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
 
             @Override
             public void onFailure(@NonNull Call<ProductListResponse> call, @NonNull Throwable t) {
+                if (t instanceof IOException) {
+                    callback.apply(new Result.Error<>(new NetworkErrorException()));
+                } else {
+                    callback.apply(new Result.Error<>(new ServerErrorException()));
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getSingleProduct(Function<Result<Product>, Void> callback, String productId) {
+        Call<ProductResponse> call = service.getSingleProduct(productId);
+        call.enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ProductResponse> call, @NonNull Response<ProductResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ProductResponse productResponse = response.body();
+                    Product product = new Product(productResponse.getId(), productResponse.getTitle(), productResponse.getDescription(), productResponse.getPrice(), productResponse.getBrand(), productResponse.getCategory(), productResponse.getImages().stream().findFirst().orElse(""));
+                    callback.apply(new Result.Success<>(product));
+                } else {
+                    callback.apply(new Result.Error<>(new ServerErrorException()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ProductResponse> call, @NonNull Throwable t) {
                 if (t instanceof IOException) {
                     callback.apply(new Result.Error<>(new NetworkErrorException()));
                 } else {

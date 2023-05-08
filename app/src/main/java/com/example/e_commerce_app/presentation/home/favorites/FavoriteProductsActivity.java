@@ -12,6 +12,7 @@ import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.home.HomeActivity;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
+import com.example.e_commerce_app.utils.ConstantsConfiguration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -56,13 +57,20 @@ public class FavoriteProductsActivity extends AppCompatActivity {
             setActivityCall(product);
             return null;
         };
-        HomeAdapter homeAdapter = new HomeAdapter(productList, onProductClick);
-        binding.favoriteProductsRecyclerView.setAdapter(homeAdapter);
+        if (productList.getProducts().isEmpty() || productList.getProducts() == null) {
+            List<Product> products = new ArrayList<>();
+            ProductList productList1 = new ProductList(products);
+            HomeAdapter homeAdapter = new HomeAdapter(productList1, onProductClick);
+            binding.favoriteProductsRecyclerView.setAdapter(homeAdapter);
+        } else {
+            HomeAdapter homeAdapter = new HomeAdapter(productList, onProductClick);
+            binding.favoriteProductsRecyclerView.setAdapter(homeAdapter);
+        }
     }
 
     public void setActivityCall(Product product) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("product", product);
+        intent.putExtra(ConstantsConfiguration.ProductKey, product.getId());
         startActivity(intent);
     }
 }

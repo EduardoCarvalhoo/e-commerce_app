@@ -10,6 +10,8 @@ import com.example.e_commerce_app.domain.useCase.GetProducts;
 import com.example.e_commerce_app.domain.useCase.GetProductsImpl;
 import com.example.e_commerce_app.domain.useCase.GetSearchedProducts;
 import com.example.e_commerce_app.domain.useCase.GetSearchedProductsImpl;
+import com.example.e_commerce_app.domain.useCase.GetSingleProduct;
+import com.example.e_commerce_app.domain.useCase.GetSingleProductImpl;
 
 import dagger.Binds;
 import dagger.Module;
@@ -33,4 +35,7 @@ public abstract class HomeModule {
 
     @Binds
     public abstract GetSearchedProducts getSearchedProducts(GetSearchedProductsImpl impl);
+
+    @Binds
+    public abstract GetSingleProduct getSingleProduct(GetSingleProductImpl impl);
 }

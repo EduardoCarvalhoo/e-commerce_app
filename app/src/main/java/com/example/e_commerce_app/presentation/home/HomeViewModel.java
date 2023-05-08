@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductCategoryList;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.domain.result.Result;
 import com.example.e_commerce_app.domain.useCase.GetProductCategories;
 import com.example.e_commerce_app.domain.useCase.GetProducts;
 import com.example.e_commerce_app.domain.useCase.GetSearchedProducts;
+import com.example.e_commerce_app.domain.useCase.GetSingleProduct;
 
 import java.util.List;
 import java.util.function.Function;
@@ -23,6 +25,7 @@ public class HomeViewModel extends ViewModel {
     private final GetProductCategories getProductCategories;
     private final GetProducts getProducts;
     private final GetSearchedProducts getSearchedProducts;
+    private final GetSingleProduct getSingleProduct;
 
     private final MutableLiveData<List<String>> _productCategoryDataSuccessfullyReadMutableLiveData = new MutableLiveData<>();
     LiveData<List<String>> productCategoryDataSuccessfullyReadLiveData = _productCategoryDataSuccessfullyReadMutableLiveData;
@@ -34,12 +37,17 @@ public class HomeViewModel extends ViewModel {
     LiveData<Throwable> errorReadingProductListDataLiveData = _errorReadingProductListDataLiveDataMutableLiveData;
     private final MutableLiveData<ProductList> _researchedProductsSuccessfullyReadMutableLiveData = new MutableLiveData<>();
     LiveData<ProductList> researchedProductsSuccessfullyReadLiveData = _researchedProductsSuccessfullyReadMutableLiveData;
+    private final MutableLiveData<Product> _productDataSuccessfullyReadMutableLiveData = new MutableLiveData<>();
+    public LiveData<Product> productDataSuccessfullyReadLiveData = _productDataSuccessfullyReadMutableLiveData;
+    private final MutableLiveData<Throwable> _errorReadingProductDataMutableLiveData = new MutableLiveData<>();
+    public LiveData<Throwable> errorReadingProductDataLiveData = _errorReadingProductDataMutableLiveData;
 
     @Inject
-    public HomeViewModel(GetProductCategories getProductCategories, GetProducts getProducts, GetSearchedProducts getSearchedProducts) {
+    public HomeViewModel(GetProductCategories getProductCategories, GetProducts getProducts, GetSearchedProducts getSearchedProducts, GetSingleProduct getSingleProduct) {
         this.getProductCategories = getProductCategories;
         this.getProducts = getProducts;
         this.getSearchedProducts = getSearchedProducts;
+        this.getSingleProduct = getSingleProduct;
     }
 
     public void getProductCategory() {
@@ -77,5 +85,17 @@ public class HomeViewModel extends ViewModel {
             return null;
         };
         getSearchedProducts.call(callback, productName.toString());
+    }
+
+    public void getSingleProduct(String productId) {
+        Function<Result<Product>, Void> callback = productResult -> {
+            if (productResult instanceof Result.Success) {
+                _productDataSuccessfullyReadMutableLiveData.postValue(((Result.Success<Product>) productResult).getData());
+            } else if (productResult instanceof Result.Error) {
+                _errorReadingProductDataMutableLiveData.postValue(((Result.Error<Product>) productResult).getValue());
+            }
+            return null;
+        };
+        getSingleProduct.call(callback, productId);
     }
 }
