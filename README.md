@@ -21,6 +21,7 @@ como favoritos para o usuário.
 ● Injeção de dependência com Hilt <br/> 
 ● Retrofit <br/> 
 ● Glide <br/>
+● SharedPreferences <br/> 
 
 https://user-images.githubusercontent.com/102394401/236968861-35454ca1-741e-4cd5-980c-72e671ec05d9.mp4
 
