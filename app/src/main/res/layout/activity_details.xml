@@ -75,35 +75,39 @@
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details_image_view" />
+            app:layout_constraintTop_toBottomOf="@+id/details_image_view"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/details_product_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
             android:ellipsize="end"
             android:gravity="top"
             android:maxLines="1"
             android:textAppearance="@style/iphone_9"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/details_device_price_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/details_view"
             tools:text="iPhone" />
 
         <TextView
             android:id="@+id/details_device_price_text_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="46dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:textAppearance="@style/some_id"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/details_product_name"
             app:layout_constraintTop_toTopOf="@+id/details_view"
             tools:text="$549" />
 
