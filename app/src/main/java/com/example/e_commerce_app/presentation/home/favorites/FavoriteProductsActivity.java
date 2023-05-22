@@ -1,28 +1,29 @@
 package com.example.e_commerce_app.presentation.home.favorites;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_commerce_app.databinding.ActivityFavoriteProductsBinding;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.home.HomeActivity;
+import com.example.e_commerce_app.presentation.home.ProductViewModel;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
 import com.example.e_commerce_app.utils.ConstantsConfiguration;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class FavoriteProductsActivity extends AppCompatActivity {
     private ActivityFavoriteProductsBinding binding;
+    private ProductViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,10 @@ public class FavoriteProductsActivity extends AppCompatActivity {
         binding = ActivityFavoriteProductsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        viewModel = new ViewModelProvider(this).get(ProductViewModel.class);
         configureBackButton();
-        setReadSharedPreferences();
+        getFavoriteProducts();
+        setupObserver();
     }
 
     public void configureBackButton() {
@@ -41,15 +44,12 @@ public class FavoriteProductsActivity extends AppCompatActivity {
         });
     }
 
-    public void setReadSharedPreferences() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String response = sharedPreferences.getString("MyPrefs", "");
-        Type type = new TypeToken<ArrayList<Product>>() {
-        }.getType();
-        List<Product> productArrayList = gson.fromJson(response, type);
-        ProductList productList = new ProductList(productArrayList);
-        setupRecyclerview(productList);
+    public void getFavoriteProducts() {
+        viewModel.getFavoriteProducts();
+    }
+
+    public void setupObserver() {
+        viewModel.favoriteProductDataSuccessfullyReadLiveData.observe(this, this::setupRecyclerview);
     }
 
     public void setupRecyclerview(ProductList productList) {
@@ -57,14 +57,13 @@ public class FavoriteProductsActivity extends AppCompatActivity {
             setActivityCall(product);
             return null;
         };
-        if (productList.getProducts().isEmpty() || productList.getProducts() == null) {
-            List<Product> products = new ArrayList<>();
-            ProductList productList1 = new ProductList(products);
-            HomeAdapter homeAdapter = new HomeAdapter(productList1, onProductClick);
-            binding.favoriteProductsRecyclerView.setAdapter(homeAdapter);
-        } else {
+        if (!productList.getProducts().isEmpty() && productList.getProducts() != null) {
             HomeAdapter homeAdapter = new HomeAdapter(productList, onProductClick);
             binding.favoriteProductsRecyclerView.setAdapter(homeAdapter);
+            binding.favoriteProductsNoProductsAddedTextView.setVisibility(View.GONE);
+        } else {
+            binding.favoriteProductsRecyclerView.setVisibility(View.GONE);
+            binding.favoriteProductsNoProductsAddedTextView.setVisibility(View.VISIBLE);
         }
     }
 

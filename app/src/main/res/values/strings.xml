@@ -20,6 +20,8 @@
 
     <!-- Favorite Products -->
     <string name="favorite_products_title_text">Favorite Products</string>
+    <string name="favorite_products_no_products_added_text">No favorite products added</string>
+
 
     <!-- Item Product -->
     <string name="item_product_dollar_sign_real">$%1$s</string>

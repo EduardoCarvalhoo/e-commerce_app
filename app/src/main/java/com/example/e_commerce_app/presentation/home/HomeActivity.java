@@ -16,13 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_commerce_app.R;
 import com.example.e_commerce_app.databinding.ActivityHomeBinding;
-import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
 import com.example.e_commerce_app.presentation.home.favorites.FavoriteProductsActivity;
 import com.example.e_commerce_app.utils.ConstantsConfiguration;
+import com.example.e_commerce_app.utils.Exceptions.NetworkErrorException;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,13 +33,13 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
-    private HomeViewModel viewModel;
+    private ProductViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = com.example.e_commerce_app.databinding.ActivityHomeBinding.inflate(getLayoutInflater());
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ProductViewModel.class);
         setContentView(binding.getRoot());
 
         viewModel.getProductCategory();

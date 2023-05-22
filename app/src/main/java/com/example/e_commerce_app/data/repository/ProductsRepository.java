@@ -15,4 +15,10 @@ public interface ProductsRepository {
     void getSearchedProducts(Function<Result<ProductList>, Void> callback, String productName);
 
     void getSingleProduct(Function<Result<Product>, Void> callback, String productId);
+
+    void saveFavoriteProduct(Product product);
+
+    void getProductFavorite(Function<Result<ProductList>, Void> callback);
+
+    void setFavoriteProductDeletion(Product product);
 }

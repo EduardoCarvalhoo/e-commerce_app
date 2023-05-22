@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,15 +15,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.example.e_commerce_app.R;
 import com.example.e_commerce_app.databinding.ActivityDetailsBinding;
-import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.presentation.home.HomeActivity;
-import com.example.e_commerce_app.presentation.home.HomeViewModel;
+import com.example.e_commerce_app.presentation.home.ProductViewModel;
 import com.example.e_commerce_app.utils.ConstantsConfiguration;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.e_commerce_app.utils.Exceptions.NetworkErrorException;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +31,9 @@ public class DetailsActivity extends AppCompatActivity {
     private ActivityDetailsBinding binding;
     private String productId;
     private ImageButton favoriteButton;
-    private final ArrayList<Product> productArrayList = new ArrayList<>();
-    private HomeViewModel viewModel;
+    private ProductViewModel viewModel;
     private Product product;
+    private final List<Product> favoriteProductsArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +41,12 @@ public class DetailsActivity extends AppCompatActivity {
         binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ProductViewModel.class);
         favoriteButton = binding.detailsFavoriteImageButton;
         productId = (String) getIntent().getSerializableExtra(ConstantsConfiguration.PRODUCT_KEY);
         getProductById();
         setupObserver();
         configureBackButton();
-        setReadSharedPreferences();
         setFavoriteButtonClick();
         configureAddButton();
     }
@@ -70,6 +65,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void getProductById() {
         viewModel.getSingleProduct(productId);
+        viewModel.getFavoriteProducts();
         binding.detailsProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -87,17 +83,21 @@ public class DetailsActivity extends AppCompatActivity {
                 showAlertDialog(getString(R.string.generic_error_text), this, (dialog, which) -> viewModel.getSingleProduct(productId));
             }
         });
+
+        viewModel.favoriteProductDataSuccessfullyReadLiveData.observe(this, favoriteProducts -> favoriteProductsArrayList.addAll(favoriteProducts.getProducts()));
     }
 
     public void defineDataPassForDetailItems() {
-        binding.detailsProgressBar.setVisibility(View.GONE);
         Glide.with(this).load(product.getImageUrl()).into(binding.detailsImageView);
         binding.detailsProductName.setText(product.getTitle());
         binding.detailsDevicePriceTextView.setText(getResources().getString(R.string.item_product_dollar_sign_real, product.getPrice()));
         binding.detailsDeviceCategoryTextView.setText(product.getCategory());
         binding.detailsBrandTextView.setText(product.getBrand());
         binding.detailsProductDescriptionTextView.setText(product.getDescription());
+        favoriteButton.setVisibility(View.VISIBLE);
+        binding.detailsProgressBar.setVisibility(View.GONE);
         setFavoriteButtonStatus();
+
     }
 
     public void showAlertDialog(String message, Context context, DialogInterface.OnClickListener listener) {
@@ -107,21 +107,14 @@ public class DetailsActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void setReadSharedPreferences() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String productListString = sharedPreferences.getString("MyPrefs", "");
-
-        if (!productListString.equals("[null]")) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Product>>() {
-            }.getType();
-            List<Product> productList = gson.fromJson(productListString, type);
-            productArrayList.addAll(productList);
+    public void setFavoriteButtonStatus() {
+        if (searchIfProductContainsInTheListOfFavoriteProducts()) {
+            favoriteButton.setSelected(true);
         }
     }
 
-    public boolean searchIfProductContainsInTheListOfProducts() {
-        for (Product products : productArrayList) {
+    public boolean searchIfProductContainsInTheListOfFavoriteProducts() {
+        for (Product products : favoriteProductsArrayList) {
             if (products.equals(product)) {
                 return true;
             }
@@ -129,38 +122,22 @@ public class DetailsActivity extends AppCompatActivity {
         return false;
     }
 
-    public void setFavoriteButtonStatus() {
-        favoriteButton.setVisibility(View.VISIBLE);
-        if (productArrayList != null && product != null) {
-            if (searchIfProductContainsInTheListOfProducts()) {
-                favoriteButton.setSelected(true);
-            }
-        }
-    }
-
     public void setFavoriteButtonClick() {
         favoriteButton.setOnClickListener(v -> {
             favoriteButton.setSelected(!favoriteButton.isSelected());
-            setFavoritesListSave();
+            if (favoriteButton.isSelected()) {
+                saveFavoriteProduct();
+            } else {
+                setDeletionOfFavoriteProduct();
+            }
         });
     }
 
-    public void setFavoritesListSave() {
-        if (favoriteButton.isSelected() && !searchIfProductContainsInTheListOfProducts()) {
-            productArrayList.add(product);
-            saveFavoriteProductsInSharedPreferences();
-        } else if (!favoriteButton.isSelected() && searchIfProductContainsInTheListOfProducts()) {
-            productArrayList.remove(product);
-            saveFavoriteProductsInSharedPreferences();
-        }
+    public void saveFavoriteProduct() {
+        viewModel.setFavoriteProductSave(product);
     }
 
-    public void saveFavoriteProductsInSharedPreferences() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = gson.toJson(productArrayList);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("MyPrefs", json);
-        editor.apply();
+    public void setDeletionOfFavoriteProduct() {
+        viewModel.setFavoriteProductDeletion(product);
     }
 }

@@ -1,31 +1,43 @@
-package com.example.e_commerce_app.data.model;
+package com.example.e_commerce_app.data.local.products.model;
 
-import java.util.List;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class ProductResponse {
+@Entity(tableName = "product_table")
+public class ProductEntity {
+    @PrimaryKey
+    @NonNull
     private String id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "price")
     private String price;
+    @ColumnInfo(name = "brand")
     private String brand;
+    @ColumnInfo(name = "category")
     private String category;
-    private List<String> images;
+    @ColumnInfo(name = "imageUrl")
+    private String imageUrl;
 
-    public ProductResponse(String id, String title, String description, String price, String brand, String category, List<String> images) {
+    public ProductEntity(@NonNull String id, String title, String description, String price, String brand, String category, String imageUrl) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
         this.brand = brand;
         this.category = category;
-        this.images = images;
+        this.imageUrl = imageUrl;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -69,11 +81,11 @@ public class ProductResponse {
         this.category = category;
     }
 
-    public List<String> getImages() {
-        return images;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImages(List<String> images) {
-        this.images = images;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

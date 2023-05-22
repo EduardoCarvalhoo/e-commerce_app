@@ -1,7 +1,7 @@
 package com.example.e_commerce_app.data.remote.rest;
 
-import com.example.e_commerce_app.data.model.ProductListResponse;
-import com.example.e_commerce_app.data.model.ProductResponse;
+import com.example.e_commerce_app.data.remote.model.ProductListResponse;
+import com.example.e_commerce_app.data.remote.model.ProductResponse;
 
 import java.util.List;
 

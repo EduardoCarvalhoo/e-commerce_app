@@ -1,4 +1,4 @@
-package com.example.e_commerce_app.data.model;
+package com.example.e_commerce_app.data.remote.model;
 
 import com.google.gson.annotations.SerializedName;
 

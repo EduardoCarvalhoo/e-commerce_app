@@ -2,15 +2,15 @@ package com.example.e_commerce_app.data.remote.products.dataSource;
 
 import androidx.annotation.NonNull;
 
-import com.example.e_commerce_app.data.model.ProductListResponse;
-import com.example.e_commerce_app.data.model.ProductResponse;
+import com.example.e_commerce_app.data.remote.model.ProductListResponse;
+import com.example.e_commerce_app.data.remote.model.ProductResponse;
 import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
-import com.example.e_commerce_app.domain.model.NetworkErrorException;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductCategoryList;
 import com.example.e_commerce_app.domain.model.ProductList;
-import com.example.e_commerce_app.domain.model.ServerErrorException;
 import com.example.e_commerce_app.domain.result.Result;
+import com.example.e_commerce_app.utils.Exceptions.NetworkErrorException;
+import com.example.e_commerce_app.utils.Exceptions.ServerErrorException;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,7 +39,12 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
             public void onResponse(@NonNull Call<ProductListResponse> call, @NonNull Response<ProductListResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ProductListResponse productListResponse = response.body();
-                    List<Product> mappedProductList = productListResponse.getProducts().stream().map(productResponse -> new Product(productResponse.getId(), productResponse.getTitle(), productResponse.getDescription(), productResponse.getPrice(), productResponse.getBrand(), productResponse.getCategory(), productResponse.getImages().stream().findFirst().orElse(""))).collect(Collectors.toList());
+                    List<Product> mappedProductList = productListResponse.getProducts().stream()
+                            .map(productResponse -> new Product(productResponse.getId(), productResponse
+                                    .getTitle(), productResponse.getDescription(), productResponse
+                                    .getPrice(), productResponse.getBrand(), productResponse.getCategory(),
+                                    productResponse.getImages().stream().findFirst().orElse("")))
+                            .collect(Collectors.toList());
                     ProductList productList = new ProductList(mappedProductList);
                     callback.apply(new Result.Success<>(productList));
                 } else {
