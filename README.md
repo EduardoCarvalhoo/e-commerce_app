@@ -17,11 +17,12 @@ como favoritos para o usuário.
 
 ## Tecnologias Utilizadas
 ● Java <br/> 
-● Arquitetura MVVM + Clean Architecture<br/> 
+● Arquitetura MVVM + Clean Architecture <br/> 
 ● Injeção de dependência com Hilt <br/> 
 ● Retrofit <br/> 
 ● Glide <br/>
-● SharedPreferences <br/> 
+● Banco de dados Room <br/>
+● Testes unitários <br/> 
 
 https://user-images.githubusercontent.com/102394401/236968861-35454ca1-741e-4cd5-980c-72e671ec05d9.mp4
 
