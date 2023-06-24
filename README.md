@@ -24,5 +24,6 @@ como favoritos para o usuário.
 ● Banco de dados Room <br/>
 ● Testes unitários <br/> 
 
-https://user-images.githubusercontent.com/102394401/236968861-35454ca1-741e-4cd5-980c-72e671ec05d9.mp4
+https://github.com/EduardoCarvalhoo/e-commerce_app/assets/102394401/e9e7bb79-c5a7-4ca3-9f20-d63fb2cf61a4
+
 
