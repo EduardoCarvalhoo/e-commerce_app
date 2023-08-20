@@ -21,7 +21,7 @@ como favoritos para o usuário.
 ● Injeção de dependência com Hilt <br/> 
 ● Retrofit <br/> 
 ● Glide <br/>
-● Banco de dados Room <br/>
+● Room <br/>
 ● Testes unitários <br/> 
 
 https://github.com/EduardoCarvalhoo/e-commerce_app/assets/102394401/e9e7bb79-c5a7-4ca3-9f20-d63fb2cf61a4
