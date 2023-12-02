@@ -14,6 +14,7 @@ import com.example.e_commerce_app.domain.useCase.GetSearchedProducts;
 import com.example.e_commerce_app.domain.useCase.GetSingleProduct;
 import com.example.e_commerce_app.domain.useCase.SetFavoriteProductDeletion;
 import com.example.e_commerce_app.domain.useCase.SetFavoriteProductSave;
+import com.example.e_commerce_app.presentation.home.viewModel.ProductViewModel;
 import com.example.e_commerce_app.utils.Exceptions.ServerErrorException;
 
 import org.junit.Before;

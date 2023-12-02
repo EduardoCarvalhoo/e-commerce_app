@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.e_commerce_app.databinding.ActivityFavoriteProductsBinding;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
-import com.example.e_commerce_app.presentation.home.HomeActivity;
-import com.example.e_commerce_app.presentation.home.ProductViewModel;
+import com.example.e_commerce_app.presentation.home.activity.HomeActivity;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
+import com.example.e_commerce_app.presentation.home.viewModel.ProductViewModel;
 import com.example.e_commerce_app.utils.ConstantsConfiguration;
 
 import java.util.function.Function;

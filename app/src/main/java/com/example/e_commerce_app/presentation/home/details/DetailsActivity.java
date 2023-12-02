@@ -16,8 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.e_commerce_app.R;
 import com.example.e_commerce_app.databinding.ActivityDetailsBinding;
 import com.example.e_commerce_app.domain.model.Product;
-import com.example.e_commerce_app.presentation.home.HomeActivity;
-import com.example.e_commerce_app.presentation.home.ProductViewModel;
+import com.example.e_commerce_app.presentation.home.activity.HomeActivity;
+import com.example.e_commerce_app.presentation.home.viewModel.ProductViewModel;
 import com.example.e_commerce_app.utils.ConstantsConfiguration;
 import com.example.e_commerce_app.utils.Exceptions.NetworkErrorException;
 

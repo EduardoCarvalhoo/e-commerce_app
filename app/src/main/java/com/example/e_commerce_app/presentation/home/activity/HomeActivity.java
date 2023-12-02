@@ -1,4 +1,4 @@
-package com.example.e_commerce_app.presentation.home;
+package com.example.e_commerce_app.presentation.home.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +21,7 @@ import com.example.e_commerce_app.domain.model.ProductList;
 import com.example.e_commerce_app.presentation.home.adapter.HomeAdapter;
 import com.example.e_commerce_app.presentation.home.details.DetailsActivity;
 import com.example.e_commerce_app.presentation.home.favorites.FavoriteProductsActivity;
+import com.example.e_commerce_app.presentation.home.viewModel.ProductViewModel;
 import com.example.e_commerce_app.utils.ConstantsConfiguration;
 import com.example.e_commerce_app.utils.Exceptions.NetworkErrorException;
 import com.google.android.material.navigation.NavigationView;
@@ -56,6 +57,7 @@ public class HomeActivity extends AppCompatActivity {
                 binding.homeTabLayout.addTab(binding.homeTabLayout.newTab().setText(productCategory));
             }
         });
+
 
         viewModel.errorReadingProductCategoryDataLiveData.observe(this, throwable -> {
             if (throwable instanceof NetworkErrorException) {
