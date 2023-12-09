@@ -22,7 +22,8 @@ public class InitialPresentationActivity extends AppCompatActivity {
     }
 
     public void setupSplashScreen() {
-        new Handler().postDelayed(() -> {
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
             Intent intent = new Intent(InitialPresentationActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
