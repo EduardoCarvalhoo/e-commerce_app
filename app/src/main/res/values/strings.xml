@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">e-commerce_app</string>
+    <string name="app_name">e-commerce</string>
 
     <!-- Home Activity -->
     <string name="home_informative_text_for_search_text">Search Product</string>

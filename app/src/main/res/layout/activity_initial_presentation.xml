@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#FAFAFA"
     tools:context=".presentation.home.splashScreen.InitialPresentationActivity">
 
     <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:src="@mipmap/ic_launcher"
+        android:id="@+id/initial_presentation_logo_splash_screen"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_splash"
         android:importantForAccessibility="no" />
 </androidx.appcompat.widget.LinearLayoutCompat>
