@@ -2,6 +2,7 @@ package com.example.e_commerce_app.data.remote.products.dataSource;
 
 import androidx.annotation.NonNull;
 
+import com.example.e_commerce_app.data.remote.model.ProductCategoriesResponse;
 import com.example.e_commerce_app.data.remote.model.ProductListResponse;
 import com.example.e_commerce_app.data.remote.model.ProductResponse;
 import com.example.e_commerce_app.data.remote.rest.ProductsApiService;
@@ -65,19 +66,19 @@ public class ProductsApiDataSourceImpl implements ProductsApiDataSource {
 
     @Override
     public void getProductCategories(Function<Result<ProductCategoryList>, Void> callback) {
-        Call<List<String>> call = service.getProductCategoryList();
-        call.enqueue(new Callback<List<String>>() {
+        Call<List<ProductCategoriesResponse>> call = service.getProductCategoryList();
+        call.enqueue(new Callback<List<ProductCategoriesResponse>>() {
             @Override
-            public void onResponse(@NonNull Call<List<String>> call, @NonNull Response<List<String>> response) {
+            public void onResponse(@NonNull Call<List<ProductCategoriesResponse>> call, @NonNull Response<List<ProductCategoriesResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<String> productCategoryListResponse = response.body();
+                    List<ProductCategoriesResponse> productCategoryListResponse = response.body();
                     ProductCategoryList productCategoryList = new ProductCategoryList(productCategoryListResponse);
                     callback.apply(new Result.Success<>(productCategoryList));
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<String>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<ProductCategoriesResponse>> call, @NonNull Throwable t) {
                 callback.apply(new Result.Error<>(t));
             }
         });

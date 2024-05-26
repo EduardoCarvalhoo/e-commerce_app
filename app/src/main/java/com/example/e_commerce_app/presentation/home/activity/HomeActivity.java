@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.e_commerce_app.R;
+import com.example.e_commerce_app.data.remote.model.ProductCategoriesResponse;
 import com.example.e_commerce_app.databinding.ActivityHomeBinding;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductList;
@@ -53,8 +54,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void setupObserver() {
         viewModel.productCategoryDataSuccessfullyReadLiveData.observe(this, productCategoryList -> {
-            for (String productCategory : productCategoryList) {
-                binding.homeTabLayout.addTab(binding.homeTabLayout.newTab().setText(productCategory));
+            for (ProductCategoriesResponse productCategory : productCategoryList) {
+                binding.homeTabLayout.addTab(binding.homeTabLayout.newTab().setText(productCategory.getSlug()));
             }
         });
 

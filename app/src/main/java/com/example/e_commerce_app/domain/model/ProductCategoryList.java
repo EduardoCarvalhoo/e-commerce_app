@@ -1,20 +1,22 @@
 package com.example.e_commerce_app.domain.model;
 
+import com.example.e_commerce_app.data.remote.model.ProductCategoriesResponse;
+
 import java.util.List;
 
 public class ProductCategoryList {
 
-    private List<String> categoryList;
+    private List<ProductCategoriesResponse> categoryList;
 
-    public ProductCategoryList(List<String> categoryList) {
+    public ProductCategoryList(List<ProductCategoriesResponse> categoryList) {
         this.categoryList = categoryList;
     }
 
-    public List<String> getCategoryList() {
+    public List<ProductCategoriesResponse> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<String> categoryList) {
+    public void setCategoryList(List<ProductCategoriesResponse> categoryList) {
         this.categoryList = categoryList;
     }
 }

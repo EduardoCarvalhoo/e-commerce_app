@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.e_commerce_app.data.remote.model.ProductCategoriesResponse;
 import com.example.e_commerce_app.domain.model.Product;
 import com.example.e_commerce_app.domain.model.ProductCategoryList;
 import com.example.e_commerce_app.domain.model.ProductList;
@@ -33,8 +34,8 @@ public class ProductViewModel extends ViewModel {
     private final GetProductFavorite getProductFavorite;
     private final SetFavoriteProductDeletion setFavoriteProductDeletion;
 
-    private final MutableLiveData<List<String>> _productCategoryDataSuccessfullyReadMutableLiveData = new MutableLiveData<>();
-    public LiveData<List<String>> productCategoryDataSuccessfullyReadLiveData = _productCategoryDataSuccessfullyReadMutableLiveData;
+    private final MutableLiveData<List<ProductCategoriesResponse>> _productCategoryDataSuccessfullyReadMutableLiveData = new MutableLiveData<>();
+    public LiveData<List<ProductCategoriesResponse>> productCategoryDataSuccessfullyReadLiveData = _productCategoryDataSuccessfullyReadMutableLiveData;
     private final MutableLiveData<Throwable> _errorReadingProductCategoryDataMutableLiveData = new MutableLiveData<>();
     public LiveData<Throwable> errorReadingProductCategoryDataLiveData = _errorReadingProductCategoryDataMutableLiveData;
     private final MutableLiveData<ProductList> _productListDataGetSuccessfullyMutableLiveData = new MutableLiveData<>();
